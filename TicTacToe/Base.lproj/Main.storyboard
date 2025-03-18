@@ -194,6 +194,26 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xLO-f5-wcY">
                                     <rect key="frame" x="0.0" y="0.0" width="385" height="843"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5iP-G7-SaD">
+                                            <rect key="frame" x="134" y="372" width="117" height="47"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" title="Reset">
+                                                <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </buttonConfiguration>
+                                            <connections>
+                                                <action selector="resetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dgh-tH-HR3"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrh-nQ-ojP">
+                                            <rect key="frame" x="-7" y="265" width="398" height="60"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="45"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </view>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
@@ -223,7 +243,9 @@
                         <outlet property="circlesScoreCard" destination="cPy-cl-ddB" id="lo6-cO-GSe"/>
                         <outlet property="crossesScoreCard" destination="snX-DQ-M77" id="LZu-gE-FpT"/>
                         <outlet property="endGameBlur" destination="vqG-Fe-cQ8" id="oeg-68-yTD"/>
+                        <outlet property="resetButton" destination="5iP-G7-SaD" id="Vay-3w-FRv"/>
                         <outlet property="turnLabel" destination="zgh-VL-w1O" id="fa5-YE-Eqp"/>
+                        <outlet property="winnerAlert" destination="vrh-nQ-ojP" id="Pjo-xH-BQ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
