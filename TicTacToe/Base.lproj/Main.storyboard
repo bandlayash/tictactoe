@@ -188,6 +188,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vqG-Fe-cQ8">
+                                <rect key="frame" x="8" y="9" width="385" height="843"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xLO-f5-wcY">
+                                    <rect key="frame" x="0.0" y="0.0" width="385" height="843"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -213,6 +222,7 @@
                         <outlet property="c3" destination="vy2-rc-MHV" id="MM2-gl-yYU"/>
                         <outlet property="circlesScoreCard" destination="cPy-cl-ddB" id="lo6-cO-GSe"/>
                         <outlet property="crossesScoreCard" destination="snX-DQ-M77" id="LZu-gE-FpT"/>
+                        <outlet property="endGameBlur" destination="vqG-Fe-cQ8" id="oeg-68-yTD"/>
                         <outlet property="turnLabel" destination="zgh-VL-w1O" id="fa5-YE-Eqp"/>
                     </connections>
                 </viewController>

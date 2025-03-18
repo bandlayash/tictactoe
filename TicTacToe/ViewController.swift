@@ -19,6 +19,7 @@ class ViewController: UIViewController
     @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var crossesScoreCard: UILabel!
     @IBOutlet weak var circlesScoreCard: UILabel!
+    @IBOutlet weak var endGameBlur: UIVisualEffectView!
     @IBOutlet weak var a1: UIButton!
     @IBOutlet weak var a2: UIButton!
     @IBOutlet weak var a3: UIButton!
@@ -57,16 +58,14 @@ class ViewController: UIViewController
         board.append(c1)
         board.append(c2)
         board.append(c3)
-        
         crossesScoreCard.text = String(crossScore)
         circlesScoreCard.text = String(circleScore)
+        endGameBlur.alpha = 0.0
     }
     
     @IBAction func boardTapAction(_ sender: UIButton)
     {
         addToBoard(sender)
-        
-        
         
         if checkWin(cross)
         {
@@ -138,16 +137,75 @@ class ViewController: UIViewController
     }
     
     
-    func resultAlert(title: String)
-    {
+    func resultAlert(title: String) {
         
-        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
-            self.resetBoard()
-        }))
-        self.present(ac, animated: true)
+        // Use tags to easily remove the views later
+        endGameBlur.tag = 100
+        view.addSubview(endGameBlur)
+
+        // Create a container view for the alert contents
+        let alertView = UIView()
+        alertView.backgroundColor = UIColor.white
+        alertView.layer.cornerRadius = 10
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        alertView.tag = 101
+        view.addSubview(alertView)
+        
+        // Center the alertView in the parent view
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            alertView.widthAnchor.constraint(equalToConstant: 250),
+            alertView.heightAnchor.constraint(equalToConstant: 150)
+        ])
+        
+        // Create and configure the title label to display the result
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(titleLabel)
+        
+        // Create and configure the reset button
+        let resetButton = UIButton(type: .system)
+        resetButton.setTitle("Reset", for: .normal)
+        resetButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.addTarget(self, action: #selector(handleResetButton(_:)), for: .touchUpInside)
+        alertView.addSubview(resetButton)
+        
+        // Layout the title label and reset button within the alert view
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10),
+            titleLabel.heightAnchor.constraint(equalToConstant: 50),
+            
+            resetButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
+            resetButton.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            resetButton.widthAnchor.constraint(equalToConstant: 100),
+            resetButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        // Animate in the blur effect
+        UIView.animate(withDuration: 0.3) {
+            self.endGameBlur.alpha = 1.0
+        }
     }
-    
+
+    @objc func handleResetButton(_ sender: UIButton) {
+        // Remove the blur and alert overlay views using their tags
+        if let endGameBlur = view.viewWithTag(100) {
+            endGameBlur.removeFromSuperview()
+        }
+        if let alertView = view.viewWithTag(101) {
+            alertView.removeFromSuperview()
+        }
+        // Reset the board as before
+        resetBoard()
+    }
+
     func resetBoard()
     {
         for button in board
