@@ -17,6 +17,8 @@ class ViewController: UIViewController
     
 
     @IBOutlet weak var turnLabel: UILabel!
+    @IBOutlet weak var crossesScoreCard: UILabel!
+    @IBOutlet weak var circlesScoreCard: UILabel!
     @IBOutlet weak var a1: UIButton!
     @IBOutlet weak var a2: UIButton!
     @IBOutlet weak var a3: UIButton!
@@ -55,22 +57,29 @@ class ViewController: UIViewController
         board.append(c1)
         board.append(c2)
         board.append(c3)
+        
+        crossesScoreCard.text = String(crossScore)
+        circlesScoreCard.text = String(circleScore)
     }
     
     @IBAction func boardTapAction(_ sender: UIButton)
     {
         addToBoard(sender)
         
+        
+        
         if checkWin(cross)
         {
             crossScore += 1
             resultAlert(title: "Crosses Win!")
+            crossesScoreCard.text = String(crossScore)
         }
         
         if checkWin(circle)
         {
             circleScore += 1
             resultAlert(title: "Circles Win!")
+            circlesScoreCard.text = String(circleScore)
         }
         
         if(fullBoard())
@@ -78,6 +87,7 @@ class ViewController: UIViewController
             resultAlert(title: "Draw")
         }
     }
+    
     
     func checkWin(_ s :String) -> Bool
     {
@@ -130,8 +140,8 @@ class ViewController: UIViewController
     
     func resultAlert(title: String)
     {
-        let message = "\nCircles " + String(circleScore) + "\n\nCrosses " + String(crossScore)
-        let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        
+        let ac = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Reset", style: .default, handler: { (_) in
             self.resetBoard()
         }))
