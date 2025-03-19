@@ -78,14 +78,14 @@ class ViewController: UIViewController
             crossesScoreCard.text = String(crossScore)
         }
         
-        if checkWin(circle)
+        else if checkWin(circle)
         {
             circleScore += 1
             resultAlert(title: "Circles Win!")
             circlesScoreCard.text = String(circleScore)
         }
         
-        if(fullBoard())
+        else if (fullBoard())
         {
             resultAlert(title: "Draw!")
         }
